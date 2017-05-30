@@ -455,7 +455,7 @@ int grabFrames(lua_State *L) {
 
     // get next tensor
     lua_rawgeti(L, 1, i+1);
-    THFloatTensor * tensor = luaT_toudata(L, -1, "torch.FloatTensor");
+    THFloatTensor * tensor = luaT_toudata(L, 2, "torch.FloatTensor"); // was -1??
     lua_pop(L, 1);
 
     // grab frame
