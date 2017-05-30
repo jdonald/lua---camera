@@ -450,13 +450,14 @@ int initCameras(lua_State *L) {
 // grab next frames
 int grabFrames(lua_State *L) {
 
+  printf("nbcams = %d, which had better say 1 or else]]n", nbcams);
   // grab pixels for each camera
   for (int i=0; i<nbcams; i++) {
 
     // get next tensor
     //lua_rawgeti(L, 1, i+1);
     const int idx = lua_tonumber(L, 1);
-    THFloatTensor * tensor = luaT_toudata(L, -1, "torch.FloatTensor"); // was -1??
+    THFloatTensor * tensor = luaT_toudata(L, 2, "torch.FloatTensor"); // was -1??
     //lua_pop(L, 1);
 
     // grab frame
@@ -481,6 +482,7 @@ int grabFrames(lua_State *L) {
     float *tensor_data = THFloatTensor_data(tensor);
 
      printf("done resizing, now doing the phat copy\n");
+     /*
     // copy pixels
     for (int y=0; y<height; y++) {
       for (int x=0; x<width; x++) {
@@ -489,6 +491,7 @@ int grabFrames(lua_State *L) {
         tensor_data[(2*height + y)*width + x] = (float)bytes[y*bytesPerRow + x*4 + 2] / 255.0;
       }
     }
+    */
     printf("done copying pixels\n");
 
     // cleanup
