@@ -298,7 +298,7 @@
   }
   dispatch_queue_t queue = dispatch_queue_create("myQueue", NULL);
   [mCaptureDecompressedVideoOutput setSampleBufferDelegate:self queue:queue];
-  dispatch_release(queue);
+//  dispatch_release(queue);
   verbose( "Done.\n" );
 
   NSDictionary *newSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32ARGB) };
@@ -331,6 +331,7 @@
   didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
      fromConnection:(AVCaptureConnection *)connection;
 {
+  printf("captureOutput got something\n");
   verbose( "." );
 
   // Swap out old frame for new one
@@ -351,6 +352,7 @@
   didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer
   fromConnection:(AVCaptureConnection *)connection;
 {
+  printf("captureOutput dead frame dropped\n");
   verbose( "." );
   verbose( "'nil' (dropped) Frame captured.\n" );
 }
