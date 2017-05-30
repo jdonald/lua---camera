@@ -455,10 +455,10 @@ int grabFrames(lua_State *L) {
   for (int i=0; i<nbcams; i++) {
 
     // get next tensor
-    lua_rawgeti(L, 1, i+1);
+    //lua_rawgeti(L, 1, i+1);
     const int idx = lua_tonumber(L, 1);
-    THFloatTensor * tensor = luaT_toudata(L, -1, "torch.FloatTensor"); // was -1??
-    lua_pop(L, 1);
+    THFloatTensor * tensor = luaT_toudata(L, 2, "torch.FloatTensor"); // was -1??
+    //lua_pop(L, 1);
 
     // grab frame
     verbose("grabbing image %d\n", i);
@@ -481,7 +481,24 @@ int grabFrames(lua_State *L) {
     THFloatTensor_resize3d(tensor, 3, height, width);
     float *tensor_data = THFloatTensor_data(tensor);
 
+    int m0 = tensor->stride[1];
+    int m1 = tensor->stride[2];
+    int m2 = tensor->stride[0];
+
      printf("done resizing, now doing the phat copy\n");
+    int i, j, k;
+    const int nChannels = 3;
+    for (i = 0; i < height; i++) {
+      for (j = 0, k = 0; j < width; j++, k+= m1) {
+        // red
+        tensor_data[k] = bytes[i*bytesPerRow + j*nChannels + 2]/255.;
+        // green
+        tensor_data[k+m2] = bytes[i*bytesPerRow + j*nChannels + 1]/255.;
+        // blue
+        tensor_data[k+2*m2] = bytes[i*bytesPerRow + j*nChannels + 0]/255.;
+       }
+      tensor_data += m0;
+    }
      /*
     // copy pixels
     for (int y=0; y<height; y++) {
