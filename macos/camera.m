@@ -272,7 +272,7 @@
   verbose( "\tCreating AVCaptureDeviceInput with %s...", [[device description] UTF8String] );
   mCaptureDeviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
   if (!mCaptureDeviceInput) {
-    error( "\tCould not convert device to input device.\n");
+    printf( "\tCould not convert device to input device.\n");
     [mCaptureSession release];
     [mCaptureDeviceInput release];
     mCaptureSession = nil;
@@ -287,7 +287,7 @@
   mCaptureDecompressedVideoOutput = [[AVCaptureVideoDataOutput alloc] init];
 
   if (!mCaptureDecompressedVideoOutput) {
-    error( "\tCould not create decompressed output.\n");
+    printf( "\tCould not create decompressed output.\n");
     [mCaptureSession release];
     [mCaptureDeviceInput release];
     [mCaptureDecompressedVideoOutput release];
