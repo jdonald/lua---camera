@@ -176,6 +176,10 @@
 
     verbose( "\tEntering synchronized block to see if frame is captured yet...");
     @synchronized(self){                    // Lock since capture is on another thread
+      if (mCurrentImageBuffer == nil) {
+          printf("d'oh my current iage buffer is nil\n");
+       }
+      else { printf("it's not nil! Yes!\n"); }
       frame = mCurrentImageBuffer;        // Hold current frame
       CVBufferRetain(frame);              // Retain it (OK if nil)
     }   // end sync: self
