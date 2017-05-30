@@ -476,9 +476,11 @@ int grabFrames(lua_State *L) {
     long width = size.width;
     long height = size.height;
     printf("resizing height = %d, width = %d\n", (int)(height), (int)(width));
+    printf("bytesperrow = %d\n", bytesPerRow);
     THFloatTensor_resize3d(tensor, 3, height, width);
     float *tensor_data = THFloatTensor_data(tensor);
 
+     printf("done resizing, now doing the phat copy\n");
     // copy pixels
     for (int y=0; y<height; y++) {
       for (int x=0; x<width; x++) {
