@@ -479,13 +479,14 @@ int grabFrames(lua_State *L) {
     printf("resizing height = %d, width = %d\n", (int)(height), (int)(width));
     printf("bytesperrow = %d\n", bytesPerRow);
     THFloatTensor_resize3d(tensor, 3, height, width);
+    printf("just finished resizing, nowpulling thfloattensor\n");
     float *tensor_data = THFloatTensor_data(tensor);
 
     int m0 = tensor->stride[1];
     int m1 = tensor->stride[2];
     int m2 = tensor->stride[0];
 
-     printf("done resizing, now doing the phat copy\n");
+     printf("done thfloattensor, now doing the phat copy\n");
     int i, j, k;
     const int nChannels = 3;
     for (i = 0; i < height; i++) {
