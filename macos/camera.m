@@ -322,6 +322,7 @@
   didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
      fromConnection:(AVCaptureConnection *)connection;
 {
+  return;
   verbose( "." );
 
   // Swap out old frame for new one
