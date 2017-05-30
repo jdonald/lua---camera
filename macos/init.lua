@@ -49,7 +49,7 @@ function Camera:__init(...)
 end
 
 function Camera:forward()
-   libcammacos.grabFrame(self.idx, self.buffer)
+   libcammacos.grabFrames(self.idx, self.buffer)
    if self.tensorsized:size(2) ~= self.buffer:size(2) or self.tensorsized:size(3) ~= self.buffer:size(3) then
       image.scale(self.tensorsized, self.buffer)
    else
