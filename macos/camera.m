@@ -304,9 +304,13 @@
   verbose("\tEntering synchronized block to clear memory...");
   @synchronized(self){
     if( mCurrentImageBuffer != nil ){
+      printf("yay it's not nil! release some buffer\n");
       CVBufferRelease(mCurrentImageBuffer);
       mCurrentImageBuffer = nil;
     }   // end if: clear old image
+    else {
+      printf("oh the current image is nil, d'oh\n");
+    }
   }   // end sync: self
   verbose( "Done.\n");
 
