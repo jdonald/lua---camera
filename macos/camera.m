@@ -174,12 +174,12 @@
   CVImageBufferRef frame = nil;               // Hold frame we find
   while( frame == nil ){                      // While waiting for a frame
 
-    //verbose( "\tEntering synchronized block to see if frame is captured yet...");
+    verbose( "\tEntering synchronized block to see if frame is captured yet...");
     @synchronized(self){                    // Lock since capture is on another thread
       frame = mCurrentImageBuffer;        // Hold current frame
       CVBufferRetain(frame);              // Retain it (OK if nil)
     }   // end sync: self
-    //verbose( "Done.\n" );
+    verbose( "Done.\n" );
 
     if( frame == nil ){                     // Still no frame? Wait a little while.
       [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow: 0.1]];
@@ -330,10 +330,12 @@
   CVImageBufferRef imageBufferToRelease;
   CVBufferRetain(videoFrame);
 
+  verbose("synchronize on capture loop\n");
   @synchronized(self){
     imageBufferToRelease = mCurrentImageBuffer;
     mCurrentImageBuffer = videoFrame;
   }   // end sync
+  verbose("end synchronize on capture loop\n");
   CVBufferRelease(imageBufferToRelease);
 }
 
