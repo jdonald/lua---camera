@@ -24,6 +24,8 @@
 
 #include <camera.h>
 
+#undef verbose
+#define verbose printf
 @interface ImageSnap()
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
   didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
