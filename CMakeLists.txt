@@ -14,9 +14,6 @@ endif (UNIX AND NOT APPLE)
 
 if (APPLE)
     add_subdirectory (opencv)
-    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-        add_subdirectory (macos)
-    endif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 endif (APPLE)
 
 if (NOT UNIX)
