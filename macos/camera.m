@@ -296,7 +296,8 @@
     mCaptureDecompressedVideoOutput = nil;
     return NO;
   }
-  dispatch_queue_t queue = dispatch_queue_create("myQueue", NULL);
+//#dispatch_queue_t queue = dispatch_queue_create("myQueue", NULL);
+  dispatch_queue_t queue = dispatch_get_main_queue();
   [mCaptureDecompressedVideoOutput setSampleBufferDelegate:self queue:queue];
 //  dispatch_release(queue);
   verbose( "Done.\n" );
