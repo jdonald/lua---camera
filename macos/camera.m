@@ -474,7 +474,7 @@ int grabFrames(lua_State *L) {
     // resize dest
     long width = size.width;
     long height = size.height;
-    printf("resizing height = %d, width = %d\n", height, width);
+    printf("resizing height = %d, width = %d\n", (int)(height), (int)(width));
     THFloatTensor_resize3d(tensor, 3, height, width);
     float *tensor_data = THFloatTensor_data(tensor);
 
