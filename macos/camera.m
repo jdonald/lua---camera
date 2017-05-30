@@ -200,7 +200,6 @@
  * Blocks until session is stopped.
  */
 -(void)stopSession{
-  return;
   verbose("Stopping session...\n" );
 
   // Make sure we've stopped
@@ -236,8 +235,6 @@
           withWidth:(unsigned int)width
          withHeight:(unsigned int)height
 {
-  verbose("wtf");
-  return NO;
   verbose( "Starting capture session...\n" );
 
   if( device == nil ) {
@@ -324,7 +321,6 @@
   didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
      fromConnection:(AVCaptureConnection *)connection;
 {
-  return;
   verbose( "." );
 
   // Swap out old frame for new one
