@@ -454,9 +454,10 @@ int grabFrames(lua_State *L) {
   for (int i=0; i<nbcams; i++) {
 
     // get next tensor
-    lua_rawgeti(L, 1, i+1);
+    //lua_rawgeti(L, 1, i+1);
+    const int idx = lua_tonumber(L, 1);
     THFloatTensor * tensor = luaT_toudata(L, 2, "torch.FloatTensor"); // was -1??
-    lua_pop(L, 1);
+    //lua_pop(L, 1);
 
     // grab frame
     verbose("grabbing image %d\n", i);
