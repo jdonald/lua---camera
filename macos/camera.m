@@ -409,11 +409,13 @@ int initCameras(lua_State *L) {
   // start snapshots
   snap = malloc(sizeof(ImageSnap *)*nbcams);
   for (int i=0; i<nbcams; i++) {
+    printf("in this small loop where i = %d\n", i);
     snap[i] = [[ImageSnap alloc] init];
     if( [snap[i] startSession:device[i] withWidth:width withHeight:height] ) {
       printf("device %d started.\n", i);
     }
   }
+  printf("done starting, now for the warmup\n");
 
   // warmup
   double delay = 1.0;
